@@ -14,7 +14,7 @@
                         <h2>{{$date}}</h2>
                     </div>
                     <div>
-                        @if (!$entry)
+                        @if ($entry == null)
                             <a href="check-in" class="btn btn-primary">Check In</a>
                         @elseif ($entry->checkout_at)
                             <h3>Thank you, Check out successfully!</h3>

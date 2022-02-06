@@ -102,7 +102,7 @@ class EmployeeController extends Controller
     {
         //
         $employee = Auth::user();
-        $date = Carbon::now('+06:00')->format('d M Y');
+        $date = Carbon::now('+06:00')->toDateString();
         $entry = DB::table('checkin_checkout_employees')->where('employee_id', $employee->id)->where('date', $date)->first();
         return view('employee_home', compact('date', 'entry'));
     }
