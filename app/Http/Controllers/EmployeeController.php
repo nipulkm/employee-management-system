@@ -114,7 +114,7 @@ class EmployeeController extends Controller
         $datetime = Carbon::now('+06:00');
         $date = $datetime->toDateString();
         $time = $datetime->format('H:i');
-        $exist = DB::table('checkin_checkout_employees')->where('date', $date);
+        $exist = DB::table('checkin_checkout_employees')->where('date', $date)->get();
         if (!count($exist)){
             DB::insert(
                 'insert into checkin_checkout_employees (employee_id, date, checkin_at) 
