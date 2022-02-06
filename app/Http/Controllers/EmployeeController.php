@@ -115,7 +115,7 @@ class EmployeeController extends Controller
         $date = $datetime->toDateString();
         $time = $datetime->format('H:i');
         $exist = DB::table('checkin_checkout_employees')->where('date', $date);
-        if (!$exist){
+        if (!count($exist)){
             DB::insert(
                 'insert into checkin_checkout_employees (employee_id, date, checkin_at) 
                 values (?, ?, ?)', 
