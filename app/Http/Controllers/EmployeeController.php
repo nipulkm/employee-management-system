@@ -114,11 +114,14 @@ class EmployeeController extends Controller
         $datetime = Carbon::now('+06:00');
         $date = $datetime->toDateString();
         $time = $datetime->format('H:i');
-        DB::insert(
-            'insert into checkin_checkout_employees (employee_id, date, checkin_at) 
-            values (?, ?, ?)', 
-            [$employee->id, $date, $time]
-        );
+        $exist = DB::table('checkin_checkout_employees')->where('date', $date);
+        if (!$exist){
+            DB::insert(
+                'insert into checkin_checkout_employees (employee_id, date, checkin_at) 
+                values (?, ?, ?)', 
+                [$employee->id, $date, $time]
+            );
+        }
         $entry = DB::table('checkin_checkout_employees')->where('employee_id', $employee->id)->where('date', $date)->first();
         return view('employee_home', compact('date', 'entry'));
     }
